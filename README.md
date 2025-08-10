@@ -23,6 +23,23 @@ The pipeline performs the following:
    - GCP Cloud Monitoring and Logging are used to track performance and errors.
 
 ---
+## Architecture Diagram
+
+```mermaid
+graph TD
+    A[Developer] -->|Push Code| B[GitHub Repository]
+    B -->|Webhook Trigger| C[Cloud Build]
+    C -->|Build & Test| D[Docker Image in Artifact Registry]
+    D -->|Deploy via Terraform| E[GCP VM / Cloud Run]
+    E -->|Serve| F[End User]
+
+    subgraph GCP
+        C
+        D
+        E
+    end
+```
+---
 
 ## 📂 Project Structure
 
